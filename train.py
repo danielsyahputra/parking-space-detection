@@ -6,9 +6,16 @@ from data import dataset
 from utils.engine import train_model
 from models.rcnn import RCNN
 
+def get_device():
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.backends.mps.is_available():
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
+
 def main(args):
-    device = torch.device("cpu")
-    # load dataloader
+    device = get_device()
     os.makedirs("output", exist_ok=True)
     wd = Path(os.getcwd()) / "output"
     train_loader, valid_loader, test_loader = dataset.get_loaders(dataset_path="data/dataset")
