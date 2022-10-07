@@ -6,7 +6,7 @@ from torch.nn.functional import grid_sample
 @torch.jit.script
 def linspace(start: Tensor, stop: Tensor, num: int):
     steps = torch.arange(num, dtype=torch.float32, device=start.device) / (num - 1)
-    for i in range(start.dim):
+    for i in range(start.ndim):
         steps = steps.unsqueeze(-1)
     out = start[None] + steps*(stop - start)[None]
     return out

@@ -1,14 +1,21 @@
 import argparse
 import torch
+import os
+from pathlib import Path
 from data import dataset
+from utils.engine import train_model
+from models.rcnn import RCNN
 
 def main(args):
+    device = torch.device("cpu")
     # load dataloader
+    os.makedirs("output", exist_ok=True)
+    wd = Path(os.getcwd()) / "output"
     train_loader, valid_loader, test_loader = dataset.get_loaders(dataset_path="data/dataset")
     print(len(train_loader.dataset), len(valid_loader.dataset), len(test_loader.dataset))
-    del train_loader
-    del valid_loader
-    del test_loader
+    train_model(RCNN(roi_res=64, pooling_type="qdrl"), 
+                train_loader, valid_loader, test_loader,
+                f"{wd}/RCNN_64_qdrl", device, verbose=True)
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Parking Space Occupancy")

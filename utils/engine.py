@@ -36,7 +36,7 @@ def train_one_epoch(model, optimizer, data_loader, res):
 
     return mean_loss, mean_accuracy
 
-@torch.no_grad
+@torch.no_grad()
 def eval_one_epoch(model, data_loader, res):
     model.eval()
     device = next(model.parameters()).device
@@ -61,7 +61,7 @@ def eval_one_epoch(model, data_loader, res):
     return mean_loss, mean_accuracy
 
 def train_model(model, train_loader, valid_loader, test_loader, model_dir, device, 
-                optimizer=torch.optim.AdamW, lr=1e-4, epoch=100, lr_decay=50, res=None, verbose=False):
+                optimizer=torch.optim.AdamW, lr=1e-4, epoch=2, lr_decay=50, res=None, verbose=False):
     model = model.to(device)
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = optimizer(params, lr=lr)
