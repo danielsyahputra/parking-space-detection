@@ -58,11 +58,11 @@ def collate_fn(batch):
     occupancy = [item[2] for item in batch]
     return [images, rois, occupancy]
 
-def get_loaders(dataset_path: str = "dataset", *args, **kwargs):
+def get_loaders( batch_size: int, test_batch_size: int, dataset_path: str, *args, **kwargs):
     train = ACPDS(dataset_path, 'train', *args, **kwargs)
     valid = ACPDS(dataset_path, 'valid', *args, **kwargs)
     test = ACPDS(dataset_path, 'test', *args, **kwargs)
-    train_loader = DataLoader(train, batch_size=1, shuffle=True, collate_fn=collate_fn)
-    valid_loader = DataLoader(valid, batch_size=1, shuffle=False, collate_fn=collate_fn)
-    test_loader = DataLoader(test, batch_size=1, shuffle=False, collate_fn=collate_fn)
+    train_loader = DataLoader(train, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+    valid_loader = DataLoader(valid, batch_size=test_batch_size, shuffle=False, collate_fn=collate_fn)
+    test_loader = DataLoader(test, batch_size=test_batch_size, shuffle=False, collate_fn=collate_fn)
     return train_loader, valid_loader, test_loader

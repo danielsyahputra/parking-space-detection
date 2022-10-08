@@ -1,5 +1,5 @@
 from torch import nn
-from torchvision.models import mobilenet_v3_large
+from torchvision.models import resnet50
 from torchvision.ops.misc import FrozenBatchNorm2d
 
 from .utils import pooling
@@ -8,15 +8,20 @@ class RCNN(nn.Module):
     def __init__(self, roi_res=100, pooling_type='square') -> None:
         super().__init__()
         # backbone
-        self.backbone = mobilenet_v3_large(weights="IMAGENET1K_V1", norm_layer=FrozenBatchNorm2d)
+        self.backbone = resnet50(weights="IMAGENET1K_V1", norm_layer=FrozenBatchNorm2d)
         self.backbone.fc = nn.Linear(in_features=960, out_features=2)
 
         # freeze bottom layers
-        start_count = 1
-        end_count = 4
-        for count, child in enumerate(self.backbone.children()):
-            if count >= start_count and count < end_count:
-                child.requires_grad_(False)
+        # start_count = 1
+        # end_count = 4
+        # for count, child in enumerate(self.backbone.children()):
+        #     if count >= start_count and count < end_count:
+        #         child.requires_grad_(False)
+
+        layers_to_train = ['layer4', 'layer3', 'layer2']
+        for name, parameter in self.backbone.named_parameters():
+            if all([not name.startswith(layer) for layer in layers_to_train]):
+                parameter.requires_grad_(False)
         
         # Pooling
         self.roi_res = roi_res
