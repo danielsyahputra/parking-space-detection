@@ -13,6 +13,7 @@ def get_device():
         device = torch.device("mps")
     else:
         device = torch.device("cpu")
+    return device
 
 def main(args):
     device = get_device()
@@ -23,7 +24,7 @@ def main(args):
     epochs = args.epochs
 
     train_loader, valid_loader, test_loader = dataset.get_loaders(dataset_path="data/dataset")
-    print(len(train_loader.dataset), len(valid_loader.dataset), len(test_loader.dataset))
+    print("================== Training ==================")
     train_model(RCNN(roi_res=64, pooling_type="qdrl"), 
                 train_loader, valid_loader, test_loader,
                 f"{wd}/RCNN_64_qdrl", device, experiment_name, epochs=epochs, verbose=True)    

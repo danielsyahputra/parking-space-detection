@@ -1,4 +1,3 @@
-from turtle import forward
 from torch import nn
 from torchvision.models import mobilenet_v3_large
 from torchvision.ops.misc import FrozenBatchNorm2d
@@ -18,10 +17,6 @@ class RCNN(nn.Module):
         for count, child in enumerate(self.backbone.children()):
             if count >= start_count and count < end_count:
                 child.requires_grad_(False)
-        # layers_to_train = ['layer4', 'layer3', 'layer2']
-        # for name, parameter in self.backbone.named_parameters():
-        #     if all([not name.startswith(layer) for layer in layers_to_train]):
-        #         parameter.requires_grad_(False)
         
         # Pooling
         self.roi_res = roi_res
