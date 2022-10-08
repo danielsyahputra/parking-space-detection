@@ -63,8 +63,8 @@ def eval_one_epoch(model, data_loader, res):
     mean_accuracy = float(torch.mean(torch.tensor(label_match_list, dtype=torch.float32)))
     return mean_loss, mean_accuracy
 
-def train_model(model, train_loader, valid_loader, test_loader, model_dir, device, experiment_name, 
-                optimizer=torch.optim.AdamW, lr=1e-4, epoch=2, lr_decay=50, res=None, verbose=True):
+def train_model(model, train_loader, valid_loader, test_loader, model_dir, device, experiment_name,
+                optimizer=torch.optim.AdamW, lr=1e-4, epochs=100, lr_decay=50, res=None, verbose=True):
     model = model.to(device)
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = optimizer(params, lr=lr)
@@ -73,7 +73,7 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
     with mlflow.start_run(experiment_id=experiment_id):
         start_time = timer()
         t0 = time.time()
-        for epoch in range(1, epoch + 1):
+        for epoch in range(1, epochs + 1):
             train_loss, train_accuracy = train_one_epoch(model, optimizer, train_loader, res)
             scheduler.step()
             valid_loss, valid_accuracy = eval_one_epoch(model, valid_loader, res)
