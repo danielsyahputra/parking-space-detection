@@ -32,16 +32,23 @@ def main(args):
                                                                 dataset_path="data/dataset")
 
     print("================================ Training ================================")
+    params = {
+        "batch_size": batch_size,
+        "test_batch_size": test_batch_size,
+        "model_name": model_name,
+        "pooling_type": pooling_type,
+        "roi_res": roi_res,
+    }
     if model_name == "RCNN":
         model = RCNN(roi_res=roi_res, pooling_type=pooling_type)
         train_model(model, train_loader, valid_loader, test_loader, 
                     f"{wd}/{experiment_name}", device, experiment_name, 
-                    epochs=epochs)
+                    epochs=epochs, params=params)
     else:
         model = FasterRCNN_FPN(pooling_type=pooling_type)
         train_model(model, train_loader, valid_loader, test_loader, 
                     f"{wd}/{experiment_name}", device, experiment_name,
-                    epochs=epochs, res=roi_res)
+                    epochs=epochs, res=roi_res, params=params)
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Parking Space Occupancy")
