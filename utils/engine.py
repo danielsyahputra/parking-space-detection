@@ -72,6 +72,7 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
     experiment_id = mlflow.create_experiment(experiment_name)
     with mlflow.start_run(experiment_id=experiment_id):
         start_time = timer()
+        t0 = time.time()
         for epoch in range(1, epoch + 1):
             train_loss, train_accuracy = train_one_epoch(model, optimizer, train_loader, res)
             scheduler.step()
