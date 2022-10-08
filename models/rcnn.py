@@ -9,7 +9,7 @@ class RCNN(nn.Module):
         super().__init__()
         # backbone
         self.backbone = resnet50(weights="IMAGENET1K_V1", norm_layer=FrozenBatchNorm2d)
-        self.backbone.fc = nn.Linear(in_features=960, out_features=2)
+        self.backbone.fc = nn.Linear(in_features=2048, out_features=2)
 
         # freeze bottom layers
         # start_count = 1
