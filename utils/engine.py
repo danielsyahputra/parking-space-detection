@@ -112,6 +112,7 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
             "test_accuracy": test_accuracy,
             "time": end_time - start_time
         })
+        mlflow.log_params(params=params)
 
         with open(f"{model_dir}/test_logs.json", "w") as f:
             json.dump({"loss": test_loss, "accuracy": test_accuracy}, f)
