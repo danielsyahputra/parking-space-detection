@@ -22,10 +22,10 @@ def main(args):
     batch_size = args.batch_size
     test_batch_size = args.test_batch_size
     epochs = args.epochs
-    experiment_name = args.experiment_name
     model_name = args.model_name
     pooling_type = args.pooling_type
     roi_res = args.roi_res
+    experiment_name = f"{model_name}_{pooling_type}_{roi_res}"
 
     train_loader, valid_loader, test_loader = dataset.get_loaders(batch_size=batch_size, 
                                                                 test_batch_size=test_batch_size,
@@ -34,12 +34,14 @@ def main(args):
     print("================================ Training ================================")
     if model_name == "RCNN":
         model = RCNN(roi_res=roi_res, pooling_type=pooling_type)
+        train_model(model, train_loader, valid_loader, test_loader, 
+                    f"{wd}/{experiment_name}", device, experiment_name, 
+                    epochs=epochs)
     else:
         model = FasterRCNN_FPN(pooling_type=pooling_type)
-
-    train_model(model,train_loader, valid_loader, test_loader,
-                f"{wd}/RCNN_64_qdrl", device, experiment_name, 
-                epochs=epochs, verbose=True)    
+        train_model(model, train_loader, valid_loader, test_loader, 
+                    f"{wd}/{experiment_name}", device, experiment_name,
+                    epochs=epochs, res=roi_res)
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Parking Space Occupancy")
@@ -70,13 +72,6 @@ if __name__=="__main__":
         default=1e-4,
         metavar="LR",
         help="Learning rate (default: 1e-4)"
-    )
-    parser.add_argument(
-        "--experiment-name",
-        type=str,
-        default="experiment",
-        metavar="EN",
-        help="Experiment Name for Tracking in MLFlow"
     )
     parser.add_argument(
         "--model-name",
