@@ -69,7 +69,12 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = optimizer(params, lr=lr)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, lr_decay, gamma=0.1)
-    experiment_id = mlflow.create_experiment(experiment_name)
+    try:
+        experiment_id = mlflow.create_experiment(experiment_name)
+    except:
+        current_experiment = dict(mlflow.get_experiment_by_name(experiment_name))
+        experiment_id = current_experiment['experiment_id']
+        
     with mlflow.start_run(experiment_id=experiment_id):
         start_time = timer()
         t0 = time.time()

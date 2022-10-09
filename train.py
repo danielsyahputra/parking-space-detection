@@ -22,6 +22,7 @@ def main(args):
     batch_size = args.batch_size
     test_batch_size = args.test_batch_size
     epochs = args.epochs
+    lr = args.lr
     model_name = args.model_name
     pooling_type = args.pooling_type
     roi_res = args.roi_res
@@ -31,7 +32,7 @@ def main(args):
                                                                 test_batch_size=test_batch_size,
                                                                 dataset_path="data/dataset")
 
-    print("================================ Training ================================")
+    print(f"================================ Training {experiment_name} ================================")
     params = {
         "batch_size": batch_size,
         "test_batch_size": test_batch_size,
@@ -43,12 +44,12 @@ def main(args):
         model = RCNN(roi_res=roi_res, pooling_type=pooling_type)
         train_model(model, train_loader, valid_loader, test_loader, 
                     f"{wd}/{experiment_name}", device, experiment_name, 
-                    epochs=epochs, params=params)
+                    lr=lr, epochs=epochs, params=params)
     else:
         model = FasterRCNN_FPN(pooling_type=pooling_type)
         train_model(model, train_loader, valid_loader, test_loader, 
                     f"{wd}/{experiment_name}", device, experiment_name,
-                    epochs=epochs, res=roi_res, params=params)
+                    lr=lr, epochs=epochs, res=roi_res, params=params)
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Parking Space Occupancy")
