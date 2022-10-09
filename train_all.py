@@ -48,14 +48,14 @@ def train_all(model_name: str, args):
                 model = RCNN(roi_res=roi_res, pooling_type=pooling_type)
                 train_model(model, train_loader, valid_loader, test_loader, 
                             f"{wd}/{experiment_name}", device, experiment_name, 
-                            lr=lr, epochs=epochs, params=params)
+                            lr=lr, epochs=epochs, params_dict=params)
             else:
                 print(f"================================ Training {model_name}_{pooling_type}_{res} ================================")
                 params["rois_res"] = res
                 model = FasterRCNN_FPN(pooling_type=pooling_type)
                 train_model(model, train_loader, valid_loader, test_loader, 
                             f"{wd}/{experiment_name}", device, experiment_name,
-                            lr=lr, epochs=epochs, res=res, params=params)
+                            lr=lr, epochs=epochs, res=res, params_dict=params)
 
 
 def main(args):

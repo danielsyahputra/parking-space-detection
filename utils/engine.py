@@ -64,7 +64,7 @@ def eval_one_epoch(model, data_loader, res):
     return mean_loss, mean_accuracy
 
 def train_model(model, train_loader, valid_loader, test_loader, model_dir, device, experiment_name,
-                optimizer=torch.optim.AdamW, lr=1e-4, epochs=10, lr_decay=50, res=None, verbose=True, params=None):
+                optimizer=torch.optim.AdamW, lr=1e-4, epochs=10, lr_decay=50, res=None, verbose=True, params_dict=None):
     model = model.to(device)
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = optimizer(params, lr=lr)
@@ -118,9 +118,7 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
             "time": end_time - start_time
         })
 
-        if params is not None:
-            for param, value in params.items():
-                mlflow.log_param(param, value)
+        mlflow.log_params(params_dict)
             
         with open(f"{model_dir}/test_logs.json", "w") as f:
             json.dump({"loss": test_loss, "accuracy": test_accuracy}, f)
