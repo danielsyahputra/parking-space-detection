@@ -74,7 +74,7 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
     except:
         current_experiment = dict(mlflow.get_experiment_by_name(experiment_name))
         experiment_id = current_experiment['experiment_id']
-        
+
     with mlflow.start_run(experiment_id=experiment_id):
         start_time = timer()
         t0 = time.time()
@@ -117,8 +117,11 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
             "test_accuracy": test_accuracy,
             "time": end_time - start_time
         })
-        mlflow.log_params(params=params)
 
+        if param is not None:
+            for param, value in params.items():
+                mlflow.log_param(param, value)
+            
         with open(f"{model_dir}/test_logs.json", "w") as f:
             json.dump({"loss": test_loss, "accuracy": test_accuracy}, f)
 
