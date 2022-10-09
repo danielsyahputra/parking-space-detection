@@ -118,7 +118,7 @@ def train_model(model, train_loader, valid_loader, test_loader, model_dir, devic
             "time": end_time - start_time
         })
 
-        if param is not None:
+        if params is not None:
             for param, value in params.items():
                 mlflow.log_param(param, value)
             
