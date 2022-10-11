@@ -20,3 +20,13 @@ def download_data(dir_name: str = "data") -> None:
         zip_ref.extractall("dataset")
     os.remove("rois_gopro.zip")
     os.chdir("..")
+
+def download_mlruns() -> None:
+    logging.info("Downloading data....")
+    gdown.download(
+        "https://drive.google.com/uc?id=1D87knvaUwQLpZxLBVwPqnwsl8sNZLS4y", quiet=False
+    )
+    logging.info("Extracting zip file....")
+    with zipfile.ZipFile("mlruns.zip", 'r') as zip_ref:
+        zip_ref.extractall("mlruns")
+    os.remove("mlruns.zip")
