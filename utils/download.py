@@ -28,5 +28,5 @@ def download_mlruns() -> None:
     )
     logging.info("Extracting zip file....")
     with zipfile.ZipFile("mlruns.zip", 'r') as zip_ref:
-        zip_ref.extractall("mlruns")
+        zip_ref.extractall("")
     os.remove("mlruns.zip")
