@@ -1,8 +1,13 @@
 # Parking Space Occupancy Detection
 
-Reproduce the Experiment for the Image-Based Parking Space Occupancy Classification: Dataset and Baseline Paper Using MLFlow
+**Reproduce the Experiment for the Image-Based Parking Space Occupancy Classification: Dataset and Baseline Paper Using MLFlow. Please refers to [martin-marek/parking-space-occupancy](https://github.com/martin-marek/parking-space-occupancy) for the original implementation.**
 
 _**Accompanying paper: [Image-Based Parking Space Occupancy Classification: Dataset and Baseline](https://arxiv.org/abs/2107.12207)**_
+
+In this repository, I provide:
+- Code to reproduce all of my result.
+- download link for [training logs with MLFlow](https://drive.google.com/uc?id=1D87knvaUwQLpZxLBVwPqnwsl8sNZLS4y).
+- Colab notebooks to [explore training experiments with MLFlow](https://colab.research.google.com/drive/16IaPSdUdTAesIf6JZnsCu_vdiRlT6wrp?usp=sharing), [explore my experiment result using MLFlow UI](https://colab.research.google.com/drive/1GMHvqljWwrUDEfhTqNYoxHiRSIwoMq4q?usp=sharing).
 
 ## About Experiments
 
@@ -47,10 +52,12 @@ Each of these experiment are trained using some configuration such as:
 - `Learning rate`: 1e-4
 - etc.
 
+Note: Because of my limited resources, I couldn't try the epochs the same as the one in the paper. 
 
 ## Run Experiments
 
 Clone this repository
+
 ```
 git clone https://github.com/danielsyahputra/parking-space-detection.git
 cd parking-space-detection
@@ -58,7 +65,7 @@ cd parking-space-detection
 
 Download data that is used for training
 ```
-python3 main.py
+python3 download.py --download-data True
 ```
 
 ### Training All Experiment at Once
@@ -67,11 +74,28 @@ If you want to run all experiment at once.
 
 ```
 python3 train_all.py \
-      
+      --batch-size <BATCH_SIZE> \ 
+      --test-batch-size <YOUR_TEXT_BATCH_SIZE> \ 
+      --epochs <YOUR_EPOCH> \ 
+      --lr <YOUR_LEARNING_RATE>
+      --experiment-name <YOUR_EXPERIMENT_NAME>      
 ```
 
-### Training one experiment
-If you just want to know one of these experiments above
+Docs:
+```
+--batch-size: Batch size for training data (default: 1).
+
+--test-batch-size: Batch size for testing and validation data (default: 1).
+
+--epochs: Number of epochs for experiment (default: 10).
+
+--lr: Learning rate used for experiment (default 1e-4).
+
+--experiment-name: The name of experiment that will be passed to MLFlow Tracking.
+```
+
+### Training One Experiment
+If you just want to know the result of one of the experiment:
 
 ```
 python3 train.py \ 
@@ -113,7 +137,7 @@ python3 train.py \
       --roi-res 128    
 ```
 
-## Result
+## Results
 
 <table>
 <tr><th>RCNN </th><th>FasterRCNN with FPN</th></tr>
@@ -141,9 +165,24 @@ Pooling Type | ROI Resolution | Time | Test Acc | Test Loss |
 
 </td></tr> </table>
 
+All these experimental results have been tracked using MLFlow and can be accessed with the following step.
 
 ## MLFlow
 
+There are two ways for accessing my tracking result.
+
+1. Local
+```
+git clone https://github.com/danielsyahputra/parking-space-detection.git
+cd parking-space-detection
+python3 download.py --download-mlruns True
+mlflow ui
+```
+Then, open your [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+2. [Colab Notebook](https://colab.research.google.com/drive/1GMHvqljWwrUDEfhTqNYoxHiRSIwoMq4q?usp=sharing)
+To access MLFlow UI that is run in Colab, we need a third-party to forward the localhost in the collab machine so it can be accesed outside the machine. In this solution, I use [Ngrok](https://dashboard.ngrok.com), a programmable network edge that adds connectivity,
+security, and observability to your apps with no code changes. For more information, you can check the collab link I have given above.
 
 ## Acknowledgments
 
