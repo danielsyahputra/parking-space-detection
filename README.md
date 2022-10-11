@@ -8,7 +8,11 @@ _**Accompanying paper: [Image-Based Parking Space Occupancy Classification: Data
 
 Two methods are provided by this paper i.e. RCNN and Faster RCNN with FPN. All of these method are customed based on ACPDS dataset. This repository aims to reproduce the experiments in this paper, then track the result using MLFlow Tracking.
 
-### Configurations:
+### Experiments
+
+<table>
+<tr><th>RCNN </th><th>FasterRCNN with FPN</th></tr>
+<tr><td>
 
 | Models | Pooling Type | ROI Resolution |
 |:----:|:-------------|:-------------|
@@ -19,6 +23,8 @@ Two methods are provided by this paper i.e. RCNN and Faster RCNN with FPN. All o
 | RCNN | square | 128 |
 | RCNN | square | 256 |
 
+</td><td>
+
 | Models | Pooling Type | Resolution |
 |:----:|:-------------|:-------------|
 | FasterRCNN_FPN | qdrl | 800 |
@@ -27,6 +33,8 @@ Two methods are provided by this paper i.e. RCNN and Faster RCNN with FPN. All o
 | FasterRCNN_FPN | square | 800 |
 | FasterRCNN_FPN | square | 1100 |
 | FasterRCNN_FPN | square | 1440 |
+
+</td></tr> </table>
 
 
 Each of these experiment are trained using some configuration such as:
@@ -106,6 +114,32 @@ python3 train.py \
 ```
 
 ## Result
+
+<table>
+<tr><th>RCNN </th><th>FasterRCNN with FPN</th></tr>
+<tr><td>
+
+Pooling Type | ROI Resolution | Time | Test Acc | Test Loss |
+|:-------------|:-------------|:-------------|:-------------|:-------------|
+| qdrl | 64 |  257.7 | 0.965 | 0.098
+| qdrl | 128 | 237.4 | 0.945 | 0.116 
+| qdrl | 256 | 271.7 | 0.962 | 0.082 
+| **square** | **64** | **234.2** | **0.972** | **0.075** 
+| square | 128 | 235 | 0.944 | 0.13 
+| square | 256 | 271.6 | 0.954 | 0.103 
+
+</td><td>
+
+| Pooling Type | Resolution | Time | Test Acc | Test Loss | 
+|:-------------|:-------------|:-------------|:-------------|:-------------|
+| qdrl | 800 | qdrl | 305.9 | 0.967 | 0.085 
+| qdrl | 1100 | qdrl | 305.4 | 0.972 | 0.075 
+| qdrl | 1440 | qdrl | 362.6 | 0.973 | 0.084 
+| **square** | **800** | **qdrl** | **275.6** | **0.974** | 0.078 
+| square | 1100 | qdrl | 302.8 | 0.972 | 0.071 
+| square | 1440 | qdrl | 361.5 | **0.974** | **0.073** 
+
+</td></tr> </table>
 
 
 ## MLFlow
