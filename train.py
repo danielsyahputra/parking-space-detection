@@ -58,49 +58,50 @@ if __name__=="__main__":
         type=int,
         default=1,
         metavar="N",
-        help="Input batch size for training (default: 32)"
+        help="Batch size for training data (default: 1)"
     )
     parser.add_argument(
         "--test-batch-size",
         type=int,
         default=1,
         metavar="N",
-        help="Input batch size for testing (default: 16)"
+        help="Batch size for validation and testing data (default: 1)"
     )
     parser.add_argument(
         "--epochs",
         type=int,
         default=10,
         metavar="N",
-        help="Number of epochs to train (default: 10)"
+        help="Number of epochs for training (default: 10)"
     )
     parser.add_argument(
         "--lr",
         type=float,
         default=1e-4,
         metavar="LR",
-        help="Learning rate (default: 1e-4)"
+        help="Learning rate for training (default: 1e-4)"
     )
     parser.add_argument(
         "--model-name",
         type=str,
         default="RCNN",
         metavar="MN",
-        help="Model that is Used for Training. Value: RCNN or FasterRCNN_FPN"
+        help="Model that is used for training. Value: RCNN or FasterRCNN_FPN"
     )
     parser.add_argument(
         "--pooling-type",
         type=str,
         default="qdrl",
         metavar="PT",
-        help="Pooling type Used for Training. Value: qdrl or square"
+        help="Pooling type used for training. Value: qdrl or square"
     )
     parser.add_argument(
         "--roi-res",
         type=int,
         default=64,
         metavar="RR",
-        help="ROI Resolution Used for Training"
+        help="""ROI Resolution Used for Training. The possible value if using RCNN as the baseline are 64, 128, and 256. 
+        But, you can use 800, 1100, and 1440 if you want to use FasterRCNN_FPN."""
     )
     args = parser.parse_args()
     main(args)

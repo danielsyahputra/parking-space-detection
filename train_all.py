@@ -69,21 +69,21 @@ if __name__=="__main__":
         type=int,
         default=1,
         metavar="N",
-        help="Input batch size for training (default: 32)"
+        help="Batch size for training data (default: 1)"
     )
     parser.add_argument(
         "--test-batch-size",
         type=int,
         default=1,
         metavar="N",
-        help="Input batch size for testing (default: 16)"
+        help="Batch size for testing data (default: 1)"
     )
     parser.add_argument(
         "--epochs",
         type=int,
         default=10,
         metavar="N",
-        help="Number of epochs to train (default: 10)"
+        help="Number of epochs for training (default: 10)"
     )
     parser.add_argument(
         "--lr",
