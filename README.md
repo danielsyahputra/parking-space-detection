@@ -6,7 +6,7 @@ _**Accompanying paper: [Image-Based Parking Space Occupancy Classification: Data
 
 In this repository, I provide:
 - Code to reproduce all of my result.
-- Download link for [training logs with MLFlow](https://drive.google.com/uc?id=1D87knvaUwQLpZxLBVwPqnwsl8sNZLS4y).
+- Download link for [training logs with MLFlow](https://drive.google.com/uc?id=1yMkr0ABnUK3yNT3u5TNMvMQwYeK7iBwN).
 - Colab notebooks to [explore training experiments with MLFlow](https://colab.research.google.com/drive/16IaPSdUdTAesIf6JZnsCu_vdiRlT6wrp?usp=sharing), [explore my experiment result using MLFlow UI](https://colab.research.google.com/drive/1GMHvqljWwrUDEfhTqNYoxHiRSIwoMq4q?usp=sharing).
 
 ## About Experiments

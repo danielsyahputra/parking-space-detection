@@ -24,7 +24,7 @@ def download_data(dir_name: str = "data") -> None:
 def download_mlruns() -> None:
     logging.info("Downloading data....")
     gdown.download(
-        "https://drive.google.com/uc?id=1D87knvaUwQLpZxLBVwPqnwsl8sNZLS4y", quiet=False
+        "https://drive.google.com/uc?id=1yMkr0ABnUK3yNT3u5TNMvMQwYeK7iBwN", quiet=False
     )
     logging.info("Extracting zip file....")
     with zipfile.ZipFile("mlruns.zip", 'r') as zip_ref:
