@@ -56,6 +56,14 @@ Note: Because of my limited resources, I couldn't try the epochs the same as the
 
 ## Run Experiments
 
+MLFlow Run:
+
+```
+mlflow run https://github.com/danielsyahputra/parking-space-detection.git -P batch_size=1 test_batch_size=1 epochs=<YOUR_EPOCH> experiment_name=<YOUR_EXPERIMENT_NAME> --env-manager=local
+```
+
+Withour MLFlow Run:
+
 Clone this repository
 
 ```
