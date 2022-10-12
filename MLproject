@@ -1,0 +1,15 @@
+name: parking-space-detection
+
+python_env: env.yaml
+
+entry_points:
+  setup:
+    command: "python3 download.py --download-data True"
+  main:
+    parameters:
+      batch_size: {type: int, default: 1}
+      test_batch_size: {type: int, default: 1}
+      lr: {type: float, default: 0.0001}
+      epochs: {type: int, default: 10}
+      experiment_name: {type: str, default: "My Experiment"}
+    command: "python3 train_all.py --batch-size {batch_size} --test-batch-size {test_batch_size} --lr {lr} --epochs {epochs} --experiment-name {experiment_name}"
