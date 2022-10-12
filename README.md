@@ -6,7 +6,7 @@ _**Accompanying paper: [Image-Based Parking Space Occupancy Classification: Data
 
 In this repository, I provide:
 - Code to reproduce all of my result.
-- download link for [training logs with MLFlow](https://drive.google.com/uc?id=1D87knvaUwQLpZxLBVwPqnwsl8sNZLS4y).
+- Download link for [training logs with MLFlow](https://drive.google.com/uc?id=1D87knvaUwQLpZxLBVwPqnwsl8sNZLS4y).
 - Colab notebooks to [explore training experiments with MLFlow](https://colab.research.google.com/drive/16IaPSdUdTAesIf6JZnsCu_vdiRlT6wrp?usp=sharing), [explore my experiment result using MLFlow UI](https://colab.research.google.com/drive/1GMHvqljWwrUDEfhTqNYoxHiRSIwoMq4q?usp=sharing).
 
 ## About Experiments
@@ -191,7 +191,7 @@ Then, open your [http://127.0.0.1:5000](http://127.0.0.1:5000)
 2. [Colab Notebook](https://colab.research.google.com/drive/1GMHvqljWwrUDEfhTqNYoxHiRSIwoMq4q?usp=sharing)
 
 To access MLFlow UI that is run in Colab, we need a third-party to forward the localhost in the collab machine so it can be accesed outside the machine. In this solution, I use [Ngrok](https://dashboard.ngrok.com), a programmable network edge that adds connectivity,
-security, and observability to your apps with no code changes. For more information, you can check the collab link I have given above.
+security, and observability to your apps with no code changes. For more information, you can check the collab link that I have given before.
 
 ## Acknowledgments
 
